@@ -19,8 +19,9 @@ public class SelenideWikiTest {
         //Переходим на страницу Wiki
         $("#wiki-tab").click();
 
-        //Проверяем что на странице есть страница с названием "Soft assertions"
-        $("#wiki-body").shouldHave(text("Soft assertions"));
+        //Проверяем что на странице в раделе Pages, есть страница с названием "Soft assertions"
+        $(".f6.Link--muted.js-wiki-more-pages-link.btn-link.mx-auto").click();
+        $("a[href='/selenide/selenide/wiki/SoftAssertions']").shouldHave(text("SoftAssertions"));
 
         //Переходим на страницу "Soft assertions"
         $(byText("Soft assertions")).click();
