@@ -8,7 +8,7 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
-public class selenideWikiTest {
+public class SelenideWikiTest {
 
     @Test
     void softAssertionsHasJUnit5CodeExamples(){
@@ -26,7 +26,20 @@ public class selenideWikiTest {
         $(byText("Soft assertions")).click();
 
         //Проверяем, что на странице есть пример кода для JUnit5
-        $("#wiki-content").shouldHave(text("Using JUnit5 extend test class"));
+        $(".markdown-body").$(byText("3. Using JUnit5 extend test class:")).sibling(0)
+                .shouldHave(text("""
+                     @ExtendWith({SoftAssertsExtension.class})
+                     class Tests {
+                          @Test
+                          void test() {
+                            Configuration.assertionMode = SOFT;
+                            open("page.html");
+                        
+                            $("#first").should(visible).click();
+                            $("#second").should(visible).click();
+                          }
+                    }
+                """));
 
     }
 }
